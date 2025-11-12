@@ -14,6 +14,8 @@ const nextConfig = {
     SLACK_CLIENT_ID: process.env.SLACK_CLIENT_ID,
     SLACK_CLIENT_SECRET: process.env.SLACK_CLIENT_SECRET,
     SLACK_APP_TOKEN: process.env.SLACK_APP_TOKEN,
+    // Mark as static build for runtime detection
+    NEXT_PHASE: 'phase-export',
   },
 }
 

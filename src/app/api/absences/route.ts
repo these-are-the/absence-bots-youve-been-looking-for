@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withApiCheck } from '@/lib/apiWrapper';
 import { CreateAbsenceRequestInput } from '@/types/absence';
 import { createAbsenceRequest, listAbsenceRequests } from '@/lib/db/absenceService';
 import { getUserByEmail } from '@/lib/db/userService';
 
-export async function POST(request: NextRequest) {
+async function handlePOST(request: NextRequest) {
   try {
     const body = await request.json();
     
@@ -41,7 +42,7 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function GET(request: NextRequest) {
+async function handleGET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     
@@ -66,3 +67,6 @@ export async function GET(request: NextRequest) {
     );
   }
 }
+
+export const POST = withApiCheck(handlePOST);
+export const GET = withApiCheck(handleGET);
