@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withApiCheck } from '@/lib/apiWrapper';
 import { listAbsenceRequests } from '@/lib/db/absenceService';
 
-// Required for static export
 export async function generateStaticParams() {
-  return []; // Return empty array for static build
+  return [];
 }
 
 async function handleGET(request: NextRequest, { params }: { params: { managerEmail: string } }) {

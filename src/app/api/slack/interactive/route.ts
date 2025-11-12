@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { withApiCheck } from '@/lib/apiWrapper';
+
+export async function generateStaticParams() {
+  return [];
+}
 import { createHmac } from 'crypto';
 
 // Verify Slack request signature

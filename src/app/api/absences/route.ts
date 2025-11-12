@@ -4,6 +4,10 @@ import { CreateAbsenceRequestInput } from '@/types/absence';
 import { createAbsenceRequest, listAbsenceRequests } from '@/lib/db/absenceService';
 import { getUserByEmail } from '@/lib/db/userService';
 
+export async function generateStaticParams() {
+  return [];
+}
+
 async function handlePOST(request: NextRequest) {
   try {
     const body = await request.json();
