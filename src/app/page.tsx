@@ -20,7 +20,7 @@ import { getGroupedHolidays, GroupedHoliday } from '@/lib/holidays';
 import { exportAllDataToConsole } from '@/lib/db/exportData';
 import { seedDatabase } from '@/lib/db/index';
 
-type Step = 'home' | 'type' | 'office' | 'duration' | 'dates' | 'note' | 'review' | 'holidays' | 'history' | 'features' | 'documentation';
+type Step = 'home' | 'type' | 'office' | 'duration' | 'dates' | 'note' | 'review' | 'submitted' | 'holidays' | 'history' | 'features' | 'documentation';
 type UserRole = 'employee' | 'manager' | null;
 
 function HomeContent() {
@@ -148,13 +148,14 @@ function HomeContent() {
     // Update URL when state or language changes
     const encoded = encodeFlowState(flowState);
     const newUrl = `/?state=${encoded}&lang=${language}`;
-    const currentUrl = router.asPath;
+    const currentSearch = searchParams.toString();
+    const newSearch = `state=${encoded}&lang=${language}`;
     
     // Only update if URL is different to avoid unnecessary navigation
-    if (currentUrl !== newUrl) {
+    if (currentSearch !== newSearch) {
       router.replace(newUrl, { scroll: false });
     }
-  }, [flowState, language, router, isInitializing]);
+  }, [flowState, language, router, searchParams, isInitializing]);
 
   const updateState = useCallback((updates: Partial<FlowState>) => {
     setFlowState(prevState => {
@@ -326,6 +327,7 @@ function HomeContent() {
     }
     
     // If logged out and on features/documentation, close them
+    // @ts-ignore - TypeScript narrowing issue
     if ((step === 'features' || step === 'documentation') && (!userEmail || !userRole)) {
       if (step === 'features') {
         handleCloseFeatures();
