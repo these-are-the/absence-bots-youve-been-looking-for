@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withApiCheck } from '@/lib/apiWrapper';
 import { getAbsenceRequest, updateAbsenceRequest, deleteAbsenceRequest } from '@/lib/db/absenceService';
 
+export async function generateStaticParams() {
+  return [];
+}
+
 async function handleGET(request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const absence = await getAbsenceRequest(params.id);

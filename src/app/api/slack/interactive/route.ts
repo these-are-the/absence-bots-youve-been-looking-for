@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { withApiCheck } from '@/lib/apiWrapper';
 import { createHmac } from 'crypto';
 
 // Verify Slack request signature
@@ -19,7 +20,7 @@ function verifySlackRequest(
   return expectedHash === hash;
 }
 
-export async function POST(request: NextRequest) {
+async function handlePOST(request: NextRequest) {
   try {
     const body = await request.text();
     const signature = request.headers.get('x-slack-signature') || '';
@@ -52,3 +53,5 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+export const POST = withApiCheck(handlePOST);
