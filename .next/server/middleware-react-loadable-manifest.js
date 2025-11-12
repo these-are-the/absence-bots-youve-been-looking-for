@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST='{"app/page.tsx -> @/lib/db/absenceService":{"id":2090,"files":[]},"app/page.tsx -> @/lib/db/index":{"id":420,"files":[]},"app/page.tsx -> @/lib/db/userService":{"id":8558,"files":[]}}';
