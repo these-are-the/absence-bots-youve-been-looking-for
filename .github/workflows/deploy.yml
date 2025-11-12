@@ -32,8 +32,8 @@ jobs:
         
       - name: Remove API routes for static build
         run: |
-          mv src/app/api src/app/api.backup
-          mv src/slack src/slack.backup
+          rm -rf src/app/api
+          rm -rf src/slack
         
       - name: Build
         run: npm run build
