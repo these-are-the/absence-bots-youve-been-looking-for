@@ -30,6 +30,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
         
+      - name: Remove API routes for static build
+        run: |
+          mv src/app/api src/app/api.backup
+          mv src/slack src/slack.backup
+        
       - name: Build
         run: npm run build
         
