@@ -14,7 +14,7 @@ export async function getUserByEmail(email: string): Promise<User | null> {
       },
     }).exec();
     
-    return result ? result.toJSON() : null;
+    return result ? result.toJSON() as User : null;
   } catch (error) {
     console.error('Error getting user by email:', error);
     return null;
@@ -24,7 +24,7 @@ export async function getUserByEmail(email: string): Promise<User | null> {
 export async function getUserById(id: string): Promise<User | null> {
   const db = await getDatabase();
   const result = await db.users.findOne(id).exec();
-  return result ? result.toJSON() : null;
+  return result ? result.toJSON() as User : null;
 }
 
 export async function getAllManagers(): Promise<User[]> {
@@ -35,7 +35,7 @@ export async function getAllManagers(): Promise<User[]> {
     },
   }).exec();
   
-  return results.map(doc => doc.toJSON());
+  return results.map(doc => doc.toJSON() as User);
 }
 
 export async function getEmployeesByManager(managerEmail: string): Promise<User[]> {
@@ -47,7 +47,7 @@ export async function getEmployeesByManager(managerEmail: string): Promise<User[
     },
   }).exec();
   
-  return results.map(doc => doc.toJSON());
+  return results.map(doc => doc.toJSON() as User);
 }
 
 export async function createUser(user: Omit<User, 'id' | 'createdAt'>): Promise<User> {
@@ -70,7 +70,7 @@ export async function listUsers(): Promise<User[]> {
   }
   
   const users = await db.users.find().exec();
-  return users.map((doc: any) => doc.toJSON());
+  return users.map((doc: any) => doc.toJSON() as User);
 }
 
 export async function updateUserTeams(userId: string, teams: string[]): Promise<User | null> {
@@ -92,7 +92,7 @@ export async function updateUserTeams(userId: string, teams: string[]): Promise<
       },
     });
     
-    return user.toJSON();
+    return user.toJSON() as User;
   } catch (error) {
     console.error('Error updating user teams:', error);
     return null;

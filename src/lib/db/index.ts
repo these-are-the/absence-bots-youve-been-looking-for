@@ -2,7 +2,8 @@ import { createRxDatabase, RxDatabase, RxCollection, addRxPlugin } from 'rxdb';
 import { getRxStorageDexie } from 'rxdb/plugins/storage-dexie';
 import { RxDBQueryBuilderPlugin } from 'rxdb/plugins/query-builder';
 import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
-import { absenceRequestSchema, AbsenceRequest } from './schema';
+import { absenceRequestSchema } from './schema';
+import { AbsenceRequest } from '@/types/absence';
 import { userSchema, User } from './schema';
 import { roleSchema, Role } from './roleSchema';
 
@@ -25,10 +26,7 @@ export async function getDatabase(): Promise<Database> {
     return databaseInstance;
   }
 
-  const storage = getRxStorageDexie({
-    name: 'vacaybot',
-    multiInstance: false,
-  });
+  const storage = getRxStorageDexie();
 
   databaseInstance = await createRxDatabase<DatabaseCollections>({
     name: 'vacaybot',

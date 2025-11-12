@@ -70,15 +70,8 @@ export async function updateAbsenceRequest(
       updateData.cancelledAt = new Date().toISOString();
     }
 
-    // Add other fields from updates
-    if (updates.type !== undefined) updateData.type = updates.type;
-    if (updates.office !== undefined) updateData.office = updates.office;
-    if (updates.startDate !== undefined) updateData.startDate = updates.startDate;
-    if (updates.endDate !== undefined) updateData.endDate = updates.endDate;
-    if (updates.hours !== undefined) updateData.hours = updates.hours;
-    if (updates.days !== undefined) updateData.days = updates.days;
+    // Add note if provided
     if (updates.note !== undefined) updateData.note = updates.note;
-    if (updates.managerEmail !== undefined) updateData.managerEmail = updates.managerEmail;
 
     // Use RxDB's update method with $set operator
     await doc.incrementalPatch(updateData);

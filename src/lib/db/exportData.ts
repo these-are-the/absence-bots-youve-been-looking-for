@@ -1,5 +1,5 @@
 import { getDatabase } from './index';
-import { AbsenceRequest } from './schema';
+import { AbsenceRequest } from '@/types/absence';
 import { User } from './schema';
 import { Role } from './roleSchema';
 

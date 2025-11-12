@@ -180,7 +180,8 @@ app.event('app_home_opened', async ({ event, client }) => {
 app.shortcut('request_absence', async ({ shortcut, ack, client }) => {
   await ack();
 
-  if (shortcut.type !== 'message_action' && shortcut.type !== 'global') return;
+  // @ts-ignore - Slack type narrowing issue
+  if (shortcut.type !== 'message_action' && shortcut.type !== 'global_shortcut') return;
 
   const userId = shortcut.user.id;
   const userInfo = await client.users.info({ user: userId });
